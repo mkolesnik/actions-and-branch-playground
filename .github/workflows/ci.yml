@@ -35,7 +35,6 @@ jobs:
         ssh-keyscan -t rsa github.com > $HOME/.ssh/known_hosts && \
         echo "${GIT_DEPLOY_KEY}" > $HOME/.ssh/id_rsa && \
         chmod 400 $HOME/.ssh/id_rsa
-        cat $HOME/.ssh/id_rsa 
       env:
         GIT_DEPLOY_KEY: ${{ secrets.GIT_DEPLOY_KEY }}
 
