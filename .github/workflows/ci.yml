@@ -28,5 +28,14 @@ jobs:
         ls -la
         git status || true
         cat $GITHUB_EVENT_PATH | python -m json.tool
+    
+    - name: Create branch based on PR
+      run: |
+        set -x
+        PR_NUM=$(echo $GITHUB_REF | cut -d / -f 3)
+        BRANCH_NAME="${GITHUB_ACTOR}/pr${PR_NUM}-${GITHUB_HEAD_REF}"
+        git branch -B $BRANCH_NAME
+        git push origin $BRANCH_NAME
+        
         
         
