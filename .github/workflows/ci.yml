@@ -28,15 +28,27 @@ jobs:
         ls -la
         git status || true
         cat $GITHUB_EVENT_PATH | python -m json.tool
-    
+    - name: Create deploy key to push
+      run: |
+        echo '=================== Create deploy key to push ==================='
+        mkdir /root/.ssh
+        ssh-keyscan -t rsa github.com > /root/.ssh/known_hosts && \
+        echo "${GIT_DEPLOY_KEY}" > /root/.ssh/id_rsa && \
+        chmod 400 /root/.ssh/id_rsa
+      env:
+        GIT_DEPLOY_KEY: ${{ secrets.GIT_DEPLOY_KEY }}
+
     - name: Create branch based on PR
       run: |
         set -x
         PR_NUM=$(echo $GITHUB_REF | cut -d / -f 3)
         BRANCH_NAME="${GITHUB_ACTOR}/pr${PR_NUM}-${GITHUB_HEAD_REF}"
+        git remote add submariner-io git@github.com:${GITHUB_DEPLOY_REPOSITORY}.git
         git checkout -B $BRANCH_NAME
-        git push origin $BRANCH_NAME
+        git push submariner-io $BRANCH_NAME
         git branch -a -v
+      env:
+        GITHUB_DEPLOY_REPOSITORY: submariner-io/submariner
         
         
         
