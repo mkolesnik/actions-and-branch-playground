@@ -1,4 +1,4 @@
-name: CI
+name: CI-brancher
 
 on: pull_request
 
@@ -18,9 +18,7 @@ jobs:
       run: echo "The time was ${{ steps.hello.outputs.time }}"
   
     - uses: actions/checkout@v1
-  
-    - name: Run a one-line script
-      run: echo Hello, world!
+  !
     
     - name: Run a multi-line script
       run: |
@@ -30,4 +28,6 @@ jobs:
         env
         ls -la
         git status || true
+        cat $GITHUB_EVENT_PATH | python -m json.tool
+        
         
