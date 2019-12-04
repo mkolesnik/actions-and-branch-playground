@@ -34,8 +34,9 @@ jobs:
         set -x
         PR_NUM=$(echo $GITHUB_REF | cut -d / -f 3)
         BRANCH_NAME="${GITHUB_ACTOR}/pr${PR_NUM}-${GITHUB_HEAD_REF}"
-        git branch -B $BRANCH_NAME
+        git checkout -B $BRANCH_NAME
         git push origin $BRANCH_NAME
+        git branch -a -v
         
         
         
