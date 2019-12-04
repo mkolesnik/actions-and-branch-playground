@@ -43,6 +43,7 @@ jobs:
         set -x
         PR_NUM=$(echo $GITHUB_REF | cut -d / -f 3)
         BRANCH_NAME="${GITHUB_ACTOR}/pr${PR_NUM}-${GITHUB_HEAD_REF}"
+        git fetch -a -v
         git remote add submariner-io git@github.com:${GITHUB_DEPLOY_REPOSITORY}.git
         git checkout remotes/origin/${GITHUB_HEAD_REF} -B $BRANCH_NAME
         git push submariner-io $BRANCH_NAME
