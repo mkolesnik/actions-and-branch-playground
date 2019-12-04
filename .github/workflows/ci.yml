@@ -49,7 +49,7 @@ jobs:
         git push -f submariner-io $BRANCH_NAME
         git branch -a -v
       env:
-        GITHUB_DEPLOY_REPOSITORY: submariner-io/submariner
+        GITHUB_DEPLOY_REPOSITORY: submariner-io/actions-and-branch-playground
         
         
         
