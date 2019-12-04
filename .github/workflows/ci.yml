@@ -46,7 +46,7 @@ jobs:
         git fetch -a -v
         git remote add submariner-io git@github.com:${GITHUB_DEPLOY_REPOSITORY}.git
         git checkout remotes/origin/${GITHUB_HEAD_REF} -B $BRANCH_NAME
-        git push submariner-io $BRANCH_NAME
+        git push -f submariner-io $BRANCH_NAME
         git branch -a -v
       env:
         GITHUB_DEPLOY_REPOSITORY: submariner-io/submariner
